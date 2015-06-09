@@ -14,6 +14,6 @@ function dataToFields($data){
 
 function ipt($f ='',$value = '')
 {
-    $str = '<input name="'.$f['name'].'" type="'.$f['type'].'" name="'.$value.'" class="form-control">';
+    $str = '<input name="'.$f['name'].'" type="'.$f['type'].'" value="'.$value.'" class="form-control">';
     return $str;
 }

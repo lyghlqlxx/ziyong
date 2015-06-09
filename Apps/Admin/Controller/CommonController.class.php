@@ -84,11 +84,30 @@ class CommonController extends Controller {
     {
         $tpl = T($this->md.'/edit');
         $tpl = str_replace("./", "", $tp);
-
+        $m = D('ApiCloud');
+        $map['class'] = strtolower($this->con);
+        $map['id'] = $id;
+        $vo = $m->where($map)->find();
+        $this->assign('vo',$vo);
         if (!file_exists($tpl)) {
             $this->display('Common/edit');
         }else{
             $this->display();
+        }
+    }
+
+    public function update($id='')
+    {
+        $m = D('ApiCloud');
+        $map['class'] = strtolower($this->con);
+        $map['id'] = $id;
+        $data = I('post.');
+        unset($map['id']);
+        $ret = $m->where($map)->save($data);
+        if ($ret !== FALSE) {
+            $this->success('操作成功');
+        }else{
+            $this->error('操作失败');
         }
     }
 
