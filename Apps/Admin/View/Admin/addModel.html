@@ -1,0 +1,9 @@
+<extend name="Public:baseAjax" />
+<block name="content">
+<form method="post" data-ajax action="{:U('Admin/saveModel')}">
+    <Ui:field name="name" label="模型名称" col="12"></Ui:field>
+    <Ui:field name="title" label="模型标题" col="12"></Ui:field>
+    <button class="btn btn-primary" type="submit">保存</button>
+    <button data-close-dialog class="btn btn-default" type="button">取消</button>
+</form>   
+</block>

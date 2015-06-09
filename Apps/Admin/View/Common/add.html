@@ -1,0 +1,26 @@
+<extend name="Public:baseAjax" />
+<block name="content">
+<Widget:show col="12" bdcls="no-padding" title="新增数据">
+<form method="post" data-ajax action="{$insertUrl}">
+<table class="table table-bordered">
+    <volist name="model[fields]" id="f">
+    <tr >
+        <eq name="f[showAdd]" value="1">
+            <td width="180" style="text-align:right">{$f.label}</td>
+            <td >
+            {:ipt($f)}
+            </td>
+        </eq>
+    </tr>
+    </volist>
+    <tr>
+        <td colspan="2">
+        <button class="btn btn-primary" type="submit">保存</button>
+    <a class="btn btn-default" href="#{$backUrl}">取消</a>
+        </td>
+    </tr>
+</table> 
+    
+</form>
+</Widget:show>
+</block>
