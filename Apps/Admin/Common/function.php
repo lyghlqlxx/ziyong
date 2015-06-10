@@ -7,6 +7,9 @@ function dataToFields($data){
         $vo['label'] = $k;
         $vo['col'] = '4';
         $vo['type'] = 'text';
+        $vo['showList'] = 1;
+        $vo['showAdd'] = 1;
+        $vo['showEdit'] = 1;
         $fields[$k] = $vo;
     }
     return $fields;
