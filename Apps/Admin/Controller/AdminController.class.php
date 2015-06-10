@@ -24,7 +24,7 @@ class AdminController extends CommonController {
         $map['class'] = 'ac_model';
         $map['id'] = $id;
         $ApiCloud = D('ApiCloud');
-        $ret = $ApiCloud->delete($map);
+        $ret = $ApiCloud->where($map)->delete();
         if ($ret !== FALSE) {
             $this->success('操作成功');
         }else{
