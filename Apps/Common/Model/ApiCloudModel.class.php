@@ -203,6 +203,8 @@ Class ApiCloudModel {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
         if ($data) curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         if (strtolower($method) == 'post')
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -215,10 +217,8 @@ Class ApiCloudModel {
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         $result = curl_exec($ch);
         curl_close($ch);
-        if ($result) {
-            $ret = json_decode($result,true);
-        }
-        if ($ret['msg']) return false;
+        $ret = json_decode($result,true);
+        if ($result && $ret['msg']) return false;
         return $ret;
     }
 }
