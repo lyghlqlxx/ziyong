@@ -25,11 +25,12 @@ Class ApiCloudModel {
 
     public function getPage($map = '',$page =1, $limit = 16,$order =' createAt DESC ')
     {
+        $countList = $this->where($map)->select();
+        
         $volist = $this->where($map)->page($page,$limit)->order($order)->select();
-
         $data['cpage'] = $page;
         $data['limit'] = $limit;
-        $data['count'] = count($volist);
+        $data['count'] = count($countList);
         $pagecount = ceil($data['count'] / $data['limit']);
         if ($pagecount < 1) $pagecount =1;
         $data['pages'] = $pagecount;
