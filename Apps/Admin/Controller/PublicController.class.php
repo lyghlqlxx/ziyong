@@ -10,7 +10,7 @@ class PublicController extends Controller {
 
         if ($account == C('API_ID') && $password == C('API_KEY')) {
             $ApiCloud = D('ApiCloud');
-            $map['class'] = 'user';
+            $map['class'] = 'role';
             $vo = $ApiCloud->where($map)->find();
             if ($vo !== FLASE) {
                 session('uid',1);
