@@ -6,11 +6,11 @@ class AdminController extends CommonController {
         $this->display();
     }
 
-    public function getAllModels($page = 1,$limit = 6)
+    public function getAllModels($curPage = 1,$limit = 6)
     {
         $ApiCloud = D('ApiCloud');
         $map['class'] = 'ac_model';
-        $ret = $ApiCloud->getPage($map,$page,$limit);
+        $ret = $ApiCloud->getPage($map,$curPage,$limit);
         $data['success'] = true;
         $data['data'] = $ret['volist'];
         $data['totalRows'] = $ret['count'];
@@ -83,11 +83,11 @@ class AdminController extends CommonController {
     }
 
 
-    public function getAllUsers()
+    public function getAllUsers($curPage = 1,$limit = 6)
     {
         $ApiCloud = D('ApiCloud');
         $map['class'] = 'ac_user';
-        $ret = $ApiCloud->getPage($map,1,6);
+        $ret = $ApiCloud->getPage($map,$curPage,$limit);
         $data['success'] = true;
         $data['data'] = $ret['volist'];
         $data['totalRows'] = $ret['count'];
