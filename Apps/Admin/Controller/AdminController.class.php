@@ -108,7 +108,7 @@ class AdminController extends CommonController {
             if ($data['password']) 
                 $data['password'] = md5($data['password']);
             else
-                $data['password'];
+                unset($data['password']);
             $ret = $ApiCloud->where($map)->save($data);
         }else{
             $map['class'] = 'ac_user';
@@ -134,7 +134,7 @@ class AdminController extends CommonController {
         $map['class'] = 'ac_user';
         $map['id'] = $id;
         $ApiCloud = D('ApiCloud');
-        $ret = $ApiCloud->delete($map);
+        $ret = $ApiCloud->where($map)->delete();
         if ($ret !== FALSE) {
             $this->success('操作成功');
         }else{

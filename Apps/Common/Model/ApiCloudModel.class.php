@@ -78,18 +78,7 @@ Class ApiCloudModel {
         unset($where['class']);
         unset($where['id']);
 
-        $this->where = $where['id'];
-        // if ($where['class']) {
-        //     $this->url.='mcm/api/'.$where['class'];
-        //     $this->saveUrl.='mcm/api/'.$where['class'];
-        // }
-        // if ($where['id']) $this->saveUrl.='/'.$where['id'];
-        // unset($where['class']);
-        // if ($where) {
-        //     $map['where'] = $where;
-        //     $filter = json_encode($map);
-        //     $this->url.='?filter='.$filter;
-        // }
+        $this->where = $where;
         
         return $this;
     }
@@ -101,13 +90,41 @@ Class ApiCloudModel {
         }else{
             return false;
         }
-        if ($id) {
+        if ($id) 
             $this->id = $id;
-        }else{
+
+        if ($this->id) {
+            $url .= '/'.$this->id;
             $ret  = $this->baseHttp($url);
-            return $ret[0];
+            if ($ret[0]) 
+                $vo = $ret[0];
+            else
+                $vo = $ret;
+            return $vo;
         }
 
+
+        $filter = array();
+        if ($this->fields) {
+            $filter['fields'] = $this->fields;
+        }
+        if ($this->where) {
+            $filter['where'] = $this->where;
+        }
+        if ($this->skip) {
+            $filter['skip'] = $this->skip;
+        }
+        if ($this->limit) {
+            $filter['limit'] = $this->limit;
+        }
+        if ($filter) {
+            $filter = json_encode($filter);
+            $url.='?filter='.$filter;
+        }
+        $ret  = $this->baseHttp($url);
+        if ($ret[0]) {
+            return $ret[0];
+        }
         return false;
     }
 
@@ -176,16 +193,15 @@ Class ApiCloudModel {
 
     public function delete($id='')
     {
-        unset($data['class']);
-        unset($data['id']);
-        if ($this->class) {
+        if ($id) $this->id = $id;
+        if ($this->class) 
             $url = $this->url.'mcm/api/'.$this->class;
-        }
-        if ($id) {
-            $url.='/'.$id;
-        }else{
+        else
             return false;
-        }
+        if ($this->id) 
+            $url.= '/'.$this->id;
+        else
+            return false;
         $ret = $this->baseHttp($url,'delete');
         return $ret ;
 
