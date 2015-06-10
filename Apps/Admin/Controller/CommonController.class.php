@@ -124,19 +124,18 @@ class CommonController extends Controller {
     }
 
 
-    public function index($page = 1,$limit = 10)
+    public function index($curPage = 1,$limit = 10)
     {
-        
         
         if (IS_POST) {
             $map['class'] = $this->con;
             $m = D('ApiCloud');
             $map['class'] = strtolower($this->con);
-            $ret = $m->getPage($map,$page,$limit);
+            $ret = $m->getPage($map,$curPage,$limit);
             $data['success'] = true;
             $data['data'] = $ret['volist'];
-            $data['totalRows'] = $limit;
-            $data['curPage'] = $page;
+            $data['totalRows'] = $ret['count'];
+            $data['curPage'] = $curPage;
             $this->ajaxReturn($data);
         }
 
