@@ -36,13 +36,17 @@ class CommonController extends Controller {
 
 
         unset($map);
-        $ApiCloud = D('ApiCloud');
-        $map['class'] = 'ac_model';
-        $data = $ApiCloud->getPage($map,1,100);
-        $this->models = $data['volist'];
+        if (S('cache_models')) {
+            $this->models = S('cache_models');
+        }else{
+            $ApiCloud = D('ApiCloud');
+            $map['class'] = 'ac_model';
+            $data = $ApiCloud->getPage($map,1,100);
+            $this->models = $data['volist'];
+            S('cache_models',$this->models);
+        }
+
         $this->assign('models',$this->models);
-
-
         foreach ($this->models as $k) {
             if (strtolower($k['name']) == strtolower($this->con)) {
                 $this->model = $k;
