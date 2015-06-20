@@ -24,4 +24,16 @@
     
 </form>
 </Widget:show>
+<load href="assets/trumbowyg/trumbowyg.css"/>
+<load href="assets/trumbowyg/trumbowyg.js"/>
+<load href="assets/trumbowyg/zh_cn.js"/>
+<script type="text/javascript">
+$(function(){
+    $('[data-editor]').trumbowyg({
+        lang: 'zh_cn',
+        resetCss: true,
+        autogrow: true,
+    });
+})    
+</script>
 </block>
