@@ -6,7 +6,8 @@
             <thead>
                 <th>字段名称</th>
                 <th>标题</th>
-                <th>类型</th>
+                <th>表单类型</th>
+                <th>字段类型</th>
                 <th>col长度</th>
                 <th>列表</th>
                 <th>新增</th>
@@ -17,6 +18,7 @@
             <tr>
                 <td>{$v.name}</td>
                 <td><a data-editable data-name="label" data-value="{$v.label}" data-pk="{$v.name}" href="#">{$v.label}</a></td>
+                <td><a data-type="select" data-editable-ipttype data-name="type" data-value="{$v.type}" data-pk="{$v.name}" href="#"></a> </td>
                 <td><a data-type="select" data-editable-ipttype data-name="type" data-value="{$v.type}" data-pk="{$v.name}" href="#"></a> </td>
                 <td><a data-editable data-name="col" data-value="{$v.col}" data-pk="{$v.name}" href="#">{$v.col}</a></td>
                 <td><a data-type="select" data-editable-isshow data-name="showList" data-value="{$v.showList}" data-pk="{$v.name}" href="#"></a></td>
@@ -86,10 +88,9 @@ var pagefunction = function() {
                 {value: 'hidden', text: 'hidden'},
                 {value: 'checkbox', text: 'checkbox'},
                 {value: 'textarea', text: 'textarea'},
-                {value: 'umeditor', text: 'umeditor'},
+                {value: 'editor', text: 'editor'},
                 {value: 'file', text: 'file'},
                 {value: 'fileinput', text: 'fileinput'},
-                {value: 'upimg', text: 'upimg'},
             ]
         });
     }
