@@ -42,6 +42,19 @@ class AdminController extends CommonController {
         $this->display();
     }
 
+    public function updateModel($title = '')
+    {
+        $ApiCloud = D('ApiCloud');
+        $map['class'] = 'ac_model';
+        $data = $_POST;
+        $ret = $ApiCloud->where($map)->save($data);
+        if ($ret !== FALSE) {
+            $this->success('操作成功');
+        }else{
+            $this->error('操作失败');
+        }
+    }
+
     public function saveModel()
     {
         

@@ -3,6 +3,7 @@
 <Widget:show bdcls="no-padding" title="对象管理" col="6">
     <Widget:action id="modelObj-header" title="">
         <a class="btn btn-primary" ajax-dialog href="{:U('Admin/addModel')}" >新增</a>
+        <a grid-edit ajax-dialog class="btn btn-info disabled" href="{:U('Admin/editModel')}" >修改</a>
         <a grid-delete data-ajax class="btn btn-danger disabled" href="{:U('Admin/deleteModel')}" >删除</a>
     </Widget:action>
     <div class="alert alert-info no-margin fade in">
@@ -32,8 +33,7 @@
         <a grid-delete data-ajax class="btn btn-danger disabled" href="{:U('Admin/deleteUser')}" >删除</a>
     </Widget:action>
     <div class="alert alert-info no-margin fade in">
-        <i class="fa-fw fa fa-info"></i>
-        请添加ApiCloud的所有对象模型。
+        AcAdmin后台登陆用户管理。     
     </div>
     <div class="table-responsive">
         <table id="userObj" class="table table-bordered">

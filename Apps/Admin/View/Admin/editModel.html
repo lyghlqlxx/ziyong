@@ -1,10 +1,10 @@
 <extend name="Public:baseAjax" />
 <block name="content">
-<form method="post" data-ajax action="{:U('Admin/saveModel')}">
-    <Ui:field name="name" label="模型名称" col="12"></Ui:field>
-    <Ui:field name="title" label="模型标题" col="12"></Ui:field>
+<form method="post" data-ajax action="{:U('Admin/updateModel')}">
+<input type="hidden" name="id" value="{$vo.id}">
+    <Ui:field name="title" value="{$vo.title}" label="模型标题" col="12"></Ui:field>
     <Ui:field hideipt="true" name="title" label="是否缓存该表" col="12">
-        <select name="cache" class="form-control ">
+        <select name="cache" data-value="{$vo.cache}" class="form-control ">
             <option value="0">否</option>
             <option value="1">是</option>
         </select>
