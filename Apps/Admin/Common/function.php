@@ -17,6 +17,10 @@ function dataToFields($data){
 
 function ipt($f ='',$value = '')
 {
-    $str = '<input name="'.$f['name'].'" type="'.$f['type'].'" value="'.$value.'" class="form-control">';
+    if ($f['type'] == 'editor') {
+        $str = '<div id="'.$f['name'].'" data-editor >'.$value.'</div>';
+    }else{
+        $str = '<input name="'.$f['name'].'" type="'.$f['type'].'" value="'.$value.'" class="form-control">';
+    }
     return $str;
 }
