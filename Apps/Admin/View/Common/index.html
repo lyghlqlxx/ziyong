@@ -2,8 +2,8 @@
 <block name="content">
 <Widget:show bdcls="no-padding" title="{$model.title}" col="12">
     <Widget:action id="modelObj-header" title="">
-        <a class="btn btn-primary" href="#{$addUrl}" >新增</a>
-        <a grid-edit class="btn btn-info disabled" href="#{$editUrl}" >修改</a>
+        <a ajax-dialog grid-btn class="btn btn-primary" href="#{$addUrl}" >新增</a>
+        <a ajax-dialog grid-btn class="btn btn-info disabled" href="#{$editUrl}" >修改</a>
         <a grid-delete data-ajax class="btn btn-danger disabled" href="{$delUrl}" >删除</a>
     </Widget:action>
     <div class="table-responsive">

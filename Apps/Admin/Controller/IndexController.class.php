@@ -1,8 +1,8 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class IndexController extends CommonController {
+class IndexController extends AcController {
     public function index(){
-        $this->display();
+        redirect(U('AcForm/index'));
     }
 }

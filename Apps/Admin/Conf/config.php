@@ -7,7 +7,7 @@ return array(
 
 
     ///////以下无须改动////////
-	'TAGLIB_PRE_LOAD'=> 'Common\\TagLib\\Smart\\Ui,Common\TagLib\Smart\Widget',
+	'TAGLIB_PRE_LOAD'=> 'Common\\TagLib\\Metronic\\Ui,Common\TagLib\Metronic\Widget',
 
 	'SESSION_PREFIX'        =>  'ApiCloud',
 

@@ -1,0 +1,7 @@
+{__NOLAYOUT__}
+<form method="post" data-ajax action="{$updateUrl}">
+    <input type="hidden" name="id" value="{$vo.id}"/>
+    <Ui:field value="{$vo.account}" name="account" label="登陆账号" col="4"></Ui:field>
+    <Ui:field name="password" label="登陆密码" col="4"></Ui:field>
+    <Ui:field value="{$vo.email}" name="email" label="用户邮箱" col="4"></Ui:field>
+</form>

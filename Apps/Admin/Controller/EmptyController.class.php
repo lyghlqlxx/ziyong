@@ -1,5 +1,5 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class EmptyController extends CommonController {
+class EmptyController extends AcController {
 }

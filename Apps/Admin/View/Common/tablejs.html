@@ -1,0 +1,34 @@
+<script type="text/javascript">
+var [table];
+$(function(){
+	var pageSize = [rows];
+	if (!pageSize) pageSize = 10
+	[table] = $.fn.bsgrid.init('[table]', {
+		url: window.location.href,
+    	pageSize: pageSize,
+    	// autoLoad:false,
+    	displayBlankRows:false,
+    	event: {
+            selectRowEvent: function (record, rowIndex, trObj, options) {
+            	//
+            	var id = [table].getRecordIndexValue(record, 'id');
+            	$('#[table]-action').find('a[grid-btn]').each(function(idx,it){
+            		$(this).removeClass('disabled');
+            		var u = $(this).attr('href');
+            		u = U('id',id,u);
+            		$(this).attr('href',u);
+            	})
+            },
+            unselectRowEvent: function (record, rowIndex, trObj, options) {
+            	var id = [table].getRecordIndexValue(record, 'id');
+            	$('#[table]-action').find('a[grid-btn]').each(function(idx,it){
+            		$(this).addClass('disabled');
+            		var u = $(this).attr('href');
+            		u = U('id','',u);
+            		$(this).attr('href',u);
+            	})
+            }
+        },
+	});
+})
+</script>
