@@ -3,17 +3,18 @@
 标签（空格分隔）： ApiCloud AcAdmin
 
 ---
+###功能介绍    
+
+1.实现通用统一的后台数据管理，查询、新增、修改、删除。    
+2.实现ApiCloud的文件上传、删除管理。    
+3.后台登陆用户管理    
+4.APP用户管理    
+5.新增数据时候，实现图片上传功能（ApiCloud的file字段）    
+
+---
 ####支持
 QQ交流群：196578969    
 支持我：ayhome@gmail.com <支付宝>    
-赞助墙：ldh***@gmail.com
-
-
-
-后台演示地址：http://acadmin.weiduzi.com/index.php     
-登陆账号：A6986237580001    
-登陆密码：5F54E123-157B-41E0-68FD-F634F462F7CF    
-
 ####使用场景
 [ApiCloud][1]是一个免费的在线生成混合型APP的平台，ApiCloud完全免费。    
 在使用ApiCloud的过程中，不可避免的需要和维护后台数据库，虽然ApiCloud提供后台数据库服务---**数据云**，但并没有提供一个可视化的类似网站后台一样的操作平台，这对维护app后台数据带来极大不便。好在官方开发了数据云的API接口，AcAdmin便由此而生。    
@@ -79,13 +80,12 @@ class名称：ac_user
 
 
   [1]: http://www.apicloud.com/
-  [2]: http://static.oschina.net/uploads/space/2015/0609/134136_eIkt_1423274.png
-  [3]: http://static.oschina.net/uploads/space/2015/0609/134137_5mdG_1423274.png
+  [2]: http://static.oschina.net/uploads/space/2015/0727/165225_DEuu_1423274.png
+  [3]: http://static.oschina.net/uploads/space/2015/0727/165226_SrNp_1423274.png
   [4]: https://git.oschina.net/anyhome/AcAdmin
   [5]: https://git.oschina.net/anyhome/AcAdmin
   [6]: http://www.thinkphp.cn/
-  [7]: http://static.oschina.net/uploads/space/2015/0609/134137_bOwD_1423274.png
-  [8]: http://static.oschina.net/uploads/space/2015/0609/134138_en88_1423274.png
+  [7]: http://static.oschina.net/uploads/space/2015/0727/165227_HCWP_1423274.png
+  [8]: http://static.oschina.net/uploads/space/2015/0727/165228_z8QT_1423274.png
   [9]: http://static.oschina.net/uploads/space/2015/0609/134138_6dl7_1423274.png
-  [10]: http://static.oschina.net/uploads/space/2015/0609/134139_qRir_1423274.png
-  [11]: http://static.oschina.net/uploads/space/2015/0609/134140_Znj4_1423274.png
+  [10]: http://static.oschina.net/uploads/space/2015/0727/165229_1gdN_1423274.png
