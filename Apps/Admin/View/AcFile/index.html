@@ -1,0 +1,29 @@
+<style type="text/css">
+.img{
+    max-width: 64px;
+    max-height: 64px;
+}
+</style>
+<Widget:show bdcls="no-padding" title="文件上传" col="12">
+    <input id="upload" name="file" class="file-loading file" type="file" data-preview-file-type="text">
+</Widget:show>
+<Widget:show bdcls="no-padding" title="文件管理" col="12">
+    <Widget:action id="modelObj-action" title="">
+        <a grid-btn data-delete class="btn btn-danger disabled" href="{$delUrl}&model={$model}" >删除</a>
+    </Widget:action>
+    <div class="table-responsive">
+        <table id="modelObj" class="table table-bordered">
+            <thead>
+                <th w_index="id">id</th>
+                <th w_index="name">文件名称</th>
+                <th w_index="type">type</th>
+                <th w_index="size">大小(byte)</th>
+                <th w_render="showImg">图</th>
+            </thead>
+        </table>
+    </div>
+    <div id="modelObj-pager" class="widget-footer">
+
+    </div>
+</Widget:show>
+<include file="tablejs" table="modelObj" rows="10" />
