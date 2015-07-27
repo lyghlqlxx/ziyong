@@ -1,0 +1,33 @@
+<Widget:show col="6" title="表单说明">
+	<ol>
+		<li>每个表单对应一个ApiCloud的对象</li>
+		<li>表单名称就是ApiCloud的class name,必须为全英文</li>
+		<li>表单标题请使用中文</li>
+	</ol>
+	<p>
+		使用前请先创建ApiCloud对象<br />
+		<code>
+			对象名:ac_model
+			字段:
+			name,title,fields,cache;
+		</code>
+	</p>
+</Widget:show>
+
+<Widget:show col="6" title="表单列表">
+	<Widget:action id="gridObj-action">
+		<a ajax-dialog class="btn blue" href="{$addUrl}">新建</a>
+		<a grid-btn data-pjax class="btn blue disabled" href="{:U("AcFormField/index")}">字段设计</a>
+		<a grid-btn ajax-dialog class="btn blue disabled" href="{$editUrl}">修改</a>
+		<a grid-btn data-ajax class="btn red disabled" href="{$delUrl}">删除</a>
+	</Widget:action>
+	<div class="table-scrollable">
+		<table id="gridObj" class="table table-striped table-bordered table-advance table-hover">
+			<th w_index="id">id</th>
+			<th w_index="name">表单名称</th>
+			<th w_index="title">表单标题</th>
+		</table>
+	</div>
+	<div id="gridObj-pager"></div>
+</Widget:show>
+<include table="gridObj" rows="10" file="Common/tablejs" />
