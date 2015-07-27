@@ -68,14 +68,14 @@
     BootstrapDialog.TYPE_DANGER = 'type-danger';
 
     BootstrapDialog.DEFAULT_TEXTS = {};
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DEFAULT] = 'Information';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_INFO] = 'Information';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_PRIMARY] = 'Information';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_SUCCESS] = 'Success';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_WARNING] = 'Warning';
-    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DANGER] = 'Danger';
-    BootstrapDialog.DEFAULT_TEXTS['OK'] = 'OK';
-    BootstrapDialog.DEFAULT_TEXTS['CANCEL'] = 'Cancel';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DEFAULT] = '信息';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_INFO] = '信息';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_PRIMARY] = '信息';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_SUCCESS] = '成功';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_WARNING] = '提示';
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DANGER] = '警告';
+    BootstrapDialog.DEFAULT_TEXTS['OK'] = '确定';
+    BootstrapDialog.DEFAULT_TEXTS['CANCEL'] = '取消';
 
     BootstrapDialog.SIZE_NORMAL = 'size-normal';
     BootstrapDialog.SIZE_WIDE = 'size-wide';    // size-wide is equal to modal-lg
@@ -88,8 +88,8 @@
 
     BootstrapDialog.ICON_SPINNER = 'glyphicon glyphicon-asterisk';
 
-    BootstrapDialog.ZINDEX_BACKDROP = 0;
-    BootstrapDialog.ZINDEX_MODAL = 1050;
+    BootstrapDialog.ZINDEX_BACKDROP = 1040;
+    BootstrapDialog.ZINDEX_MODAL = 99050;
 
     /**
      * Default options.
