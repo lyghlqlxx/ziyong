@@ -1,12 +1,12 @@
 <?php
-namespace Common\TagLib\Smart;
+namespace Common\TagLib\Metronic;
 use Think\Template\TagLib;
 defined('THINK_PATH') or exit();
 class Ui extends TagLib {
     protected $tags = array(
         'col' => array('attr' => 'col,cls','level'=>3,'alias'=>'iterate'),
         'field' => array('attr' => 'col,cls','level'=>3,'alias'=>'iterate'),
-        '_tableForm' => array('attr' => 'col,cls','level'=>3,'alias'=>'iterate'),
+        'form' => array('attr' => 'col,cls','level'=>3,'alias'=>'iterate'),
     );
 
     function toDatetime( $time, $format = 'Y-m-d H:i:s' ) {
@@ -81,38 +81,19 @@ class Ui extends TagLib {
         if ($required || $info['valid']) {
             $required = ' required="true" ';
         }
-        $format = "text";
-        if ($info['format']) {
-            $format = $info['format'];
-        }
 
-        $str ='<input '.$v.$required.' value="'.$value.'"  name="'.$name.'" type="'.$format.'" placeholder="'.$tip.'" id="field_'.$name.'" class="form-control ">';
-        if ($info['ipttype'] == 'fileinput') {
-            $str = '<span class="input-icon icon-right inverted">'.$str.'<i data-name="'.$name.'" class="fileinput fa fa-cloud-upload bg-blue"></i></span>';
-        }
-        return $str;
-    }
-
-    public function textarea($attr,$info){
-        extract($attr);
-
-        if ($info['auto'] && $value) {
-            $fun = $info['auto'];
-            // $value = $this->$fun($value);
-        }
-        if ($required || $info['valid']) {
-            $required = ' required="true" ';
-        }
-
-        $str ='<textarea '.$v.$required.'  name="'.$name.'" placeholder="'.$tip.'" id="field_'.$name.'" class="form-control ">'.$value.'</textarea>';
+        $str ='<input '.$v.$required.' value="'.$value.'"  name="'.$name.'" type="text" placeholder="'.$tip.'" id="field_'.$name.'" class="form-control ">';
         return $str;
     }
 
 
     public function _field($attr,$content) {
         extract($attr);
-        if (!$tb) $tb = CONTROLLER_NAME;
 
+        if ($tb == "Contacts" || $tb == "GjcpSy" || $tb == 'SysSyqk'){
+            $name_arr = explode(".", $name);
+            $name = $name_arr[count($name_arr)-1];
+        }
 
         if ($tb)  $tb = C('DB_PREFIX').parse_name($tb);
 
@@ -133,8 +114,6 @@ class Ui extends TagLib {
             $ipt = $this->tpl->parse($content);
         }elseif ($finfo['ipttype'] == 'select') {
             $ipt = $this->select($attr,$finfo);
-        }elseif ($finfo['ipttype'] == 'textarea') {
-            $ipt = $this->textarea($attr,$finfo);
         }else{
             $ipt = $this->input($attr,$finfo);
         }
@@ -154,7 +133,6 @@ class Ui extends TagLib {
         extract($attr);
         $_col = "col-md-12 col-sm-21 col-xs-12 col-lg-12 ";
         if ($col) $_col = 'col-md-'.$col.' col-sm-'.$col.' col-xs-'.$col.' col-lg-'.$col;
-        if ($cls) $_col .= ' '.$cls;
         $content = $this->tpl->parse($content);
         $str = '<div class="'.$_col.'">
                     '.$content.'
@@ -162,9 +140,21 @@ class Ui extends TagLib {
         return $str;
     }
 
-
-    public function _tableForm($attr,$content)
-    {
-        extract($attr);
-    }
+    // public function _form($attr,$content)
+    // {
+    //     extract($attr);
+    //     $_col = "form-body";
+    //     if ($col) $_col = ' col-md-'.$col.' col-sm-'.$col.' col-xs-'.$col.' col-lg-'.$col;
+    //     $content = $this->tpl->parse($content);
+    //     $acs = '<div class="form-actions">
+    //             <button class="btn blue" type="submit">保存</button>
+    //         </div>';
+    //     $str = '<div class="'.$_col.'">
+    //                 '.$content.'
+    //         </div>'.$acs;
+    //     if($ajax == 'true') $_ajax = 'submit-ajax';
+    //     if(!$method) $method = 'POST';
+    //     $_form = '<form '.$_ajax.' class="'.$cls.'"" method="'.$method.'"" action="'.$action.'"" >'.$str.'</form>';
+    //     return $_form;
+    // }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Common\TagLib\Smart;
+namespace Common\TagLib\Metronic;
 use Think\Template\TagLib;
 defined('THINK_PATH') or exit();
 class Widget extends TagLib {
@@ -15,19 +15,28 @@ class Widget extends TagLib {
         if ($col) $_col = 'col-md-'.$col.' col-sm-'.$col.' col-xs-'.$col.' col-lg-'.$col;
 
 
-        if ($title) $caption = '<h2>'.$title.'</h2>';
+        if ($title) $caption = '<span class="caption">'.$title.'</span>';
 
 
 
         $actions_tpl = '';
+        if ($actions) {
+            $acs_arr = explode(',', $actions);
+            foreach ($acs_arr as $k) {
+                $actions_tpl .= $_actions[$k];
+            }
+            if ($actions_tpl) {
+                $actions_tpl = '<div class="portlet-buttons">'.$actions_tpl.'</div>';
+            }
+        }
 
         // $actions_tpl = $this->tpl->parse($actions_tpl);
 
 
-        $_cls = ' jarviswidget jarviswidget-color-green ';
+        $_cls = 'portlet box blue-hoki';
         if ($cls) $_cls .= ' '.$cls;
 
-        $_bdcls = 'widget-body';
+        $_bdcls = 'portlet-body';
         if ($bdcls) $_bdcls .= ' '.$bdcls;
 
         $regAction   = '/<Widget:action.*?>(.*?)<\/Widget:action>/is';
@@ -42,34 +51,36 @@ class Widget extends TagLib {
             }
         }
 
+
         $content = $this->tpl->parse($content);
         $hd = $icon.$caption.$actions_tpl;
 
-        $_hdcls = ' ';
+        $_hdcls = 'portlet-title ';
         if ($hdcls) $_hdcls = $hdcls;
         if ($hd) {
-            $hd_str = '<header class="'.$_hdcls.'">
+            $hd_str = '<div class="'.$_hdcls.'">
                         '.$icon.$caption.$actions_tpl.'
-                    </header>';
+                    </div>';
         }
-        $str = '<article class="'.$_col.'">
-                    <div id="wid-id-1" data-widget-editbutton="false" class="'.$_cls.'">
+        $str = '<div class="'.$_col.'">
+                    <div class="'.$_cls.'">
                         '.$hd_str.'
-                        <div><div class="'.$_bdcls.'">
+                        <div class="'.$_bdcls.'">
                             '.$content.'
                         </div>
-                        </div>
                     </div>
-                </article>';
+                </div>';
         return $str;
     }
 
+
     public function _action($attr,$content){
         extract($attr);
-        if($id) $_id = 'id="'.$id.'"';
+
         $content = $this->tpl->parse($content);
+        if($id) $_id = "id='".$id."'";
         if ($content) {
-            $str = '<div '.$_id.' role="menu" class="widget-toolbar">'.$content.'</div>';
+            $str = '<div '.$_id.' class="actions">'.$content.'</div>';
         }
         return $str;
     }
