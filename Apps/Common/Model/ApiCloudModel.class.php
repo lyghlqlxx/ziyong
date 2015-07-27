@@ -23,14 +23,15 @@ Class ApiCloudModel {
         $this->appKey = sha1(C('API_ID')."UZ".C('API_KEY')."UZ".getMillisecond()).".".getMillisecond();
     }
 
-    public function getPage($map = '',$page =1, $limit = 16,$order =' createAt DESC ')
+    public function getPage($map = '',$page =1, $limit = 16,$order =' createdAt DESC')
     {
-        $countList = $this->where($map)->select();
-        
+        // $countList = $this->where($map)->select();
+
         $volist = $this->where($map)->page($page,$limit)->order($order)->select();
         $data['cpage'] = $page;
         $data['limit'] = $limit;
-        $data['count'] = count($countList);
+        // $data['count'] = count($countList);
+        $data['count'] = 10000;
         $pagecount = ceil($data['count'] / $data['limit']);
         if ($pagecount < 1) $pagecount =1;
         $data['pages'] = $pagecount;
@@ -80,7 +81,7 @@ Class ApiCloudModel {
         unset($where['id']);
 
         $this->where = $where;
-        
+
         return $this;
     }
 
@@ -91,13 +92,13 @@ Class ApiCloudModel {
         }else{
             return false;
         }
-        if ($id) 
+        if ($id)
             $this->id = $id;
 
         if ($this->id) {
             $url .= '/'.$this->id;
             $ret  = $this->baseHttp($url);
-            if ($ret[0]) 
+            if ($ret[0])
                 $vo = $ret[0];
             else
                 $vo = $ret;
@@ -145,17 +146,17 @@ Class ApiCloudModel {
         if ($this->skip) {
             $filter['skip'] = $this->skip;
         }
-        // if ($this->order) {
-        //     $filter['order'] = $this->order;
-        // }
+        if ($this->order) {
+            $filter['order'] = $this->order;
+        }
         if ($this->limit) {
             $filter['limit'] = $this->limit;
         }
+
         if ($filter) {
             $filter = json_encode($filter);
-            $url.='?filter='.$filter;
+            $url.='?filter='.urlencode($filter);
         }
-
         $data =  $this->baseHttp($url);
         return $data;
     }
@@ -195,11 +196,11 @@ Class ApiCloudModel {
     public function delete($id='')
     {
         if ($id) $this->id = $id;
-        if ($this->class) 
+        if ($this->class)
             $url = $this->url.'mcm/api/'.$this->class;
         else
             return false;
-        if ($this->id) 
+        if ($this->id)
             $url.= '/'.$this->id;
         else
             return false;
@@ -226,9 +227,9 @@ Class ApiCloudModel {
         if (strtolower($method) == 'post')
             curl_setopt($ch, CURLOPT_POST, 1);
         if (strtolower($method) == 'delete')
-            curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, 'DELETE' ); 
-        elseif (strtolower($method) == 'put') 
-            curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' ); 
+            curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, 'DELETE' );
+        elseif (strtolower($method) == 'put')
+            curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' );
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
