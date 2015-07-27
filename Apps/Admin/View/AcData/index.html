@@ -1,0 +1,24 @@
+<Widget:show bdcls="no-padding" title="{$cm.title}" col="12">
+    <Widget:action id="modelObj-action" title="">
+        <a grid-btn class="btn btn-primary" href="{$addUrl}&model={$model}" >新增</a>
+        <a grid-btn class="btn btn-info disabled" href="{$editUrl}&model={$model}" >修改</a>
+        <a grid-btn data-delete class="btn btn-danger disabled" href="{$delUrl}&model={$model}" >删除</a>
+    </Widget:action>
+    <div class="table-responsive">
+        <table id="modelObj" class="table table-bordered">
+            <thead>
+            <volist name="cm[fields]" id="f">
+            <eq name="f[showList]" value="1">
+                <th w_index="{$f.name}">{$f.label}</th>
+            </eq>
+            </volist>
+            </thead>
+        </table>
+    </div>
+    <div id="modelObj-pager" class="widget-footer">
+          
+    </div>
+</Widget:show>
+<include file="tablejs" table="modelObj" rows="10" />
+
+
