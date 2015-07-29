@@ -33,6 +33,7 @@ class AcFormController extends AcController {
 
     public function update($title = '')
     {
+        S('cache_models',null);
         $ApiCloud = D('ApiCloud');
         $map['class'] = 'ac_model';
         $data = $_POST;
@@ -48,6 +49,7 @@ class AcFormController extends AcController {
     public function insert()
     {
 
+        S('cache_models',null);
         $ApiCloud = D('ApiCloud');
         $name = I('name');
         if (!$name) {
@@ -83,6 +85,7 @@ class AcFormController extends AcController {
         $map['id'] = $id;
         $map['class'] = 'ac_model';
         $ret = $ApiCloud->where($map)->delete();
+        S('cache_models',null);
         if ($ret !== FALSE) {
             $this->success('操作成功');
         }else{

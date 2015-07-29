@@ -76,7 +76,7 @@ class AcDataController extends AcController {
         unset($map['id']);
         $ret = $m->where($map)->add($data);
         if ($ret !== FALSE) {
-            $this->success('操作成功');
+            $this->success('操作成功',U('AcData/index?model='.$model));
         }else{
             $this->error('操作失败');
         }
