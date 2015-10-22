@@ -1,31 +1,32 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class AcFileController extends AcController {
-    public function index($curPage =1,$pageSize = 10)
-    {
+class AcFileController extends CommonController {
+    public function index($curPage =1,$pageSize = 10){
         if (IS_POST) {
             $m = D('ApiCloud');
             $map['class'] = 'file';
-            $ret = $m->getPage($map,$curPage,(int)$pageSize);
 
-
+            $ret = $m->getPage($map,$curPage,$pageSize);
+            if (!$ret){
+                $ret['volist'] = '';
+                $ret['count'] = 0;
+            } 
             $data['success'] = true;
             $data['data'] = $ret['volist'];
-            $data['totalRows'] = 1000;
+            $data['totalRows'] = $ret['count'];
             $data['curPage'] = $curPage;
             $this->ajaxReturn($data);
         }
-        $appKey = sha1(C('API_ID')."UZ".C('API_KEY')."UZ".getMillisecond()).".".getMillisecond();
-        $this->assign('appKey', $appKey);
-        $this->display();
-    }
 
-    public function upfile()
-    {
-        $appKey = sha1(C('API_ID')."UZ".C('API_KEY')."UZ".getMillisecond()).".".getMillisecond();
-        $this->assign('appKey', $appKey);
-        $this->display();
+        $tpl = T($this->con.'/index');
+        $tpl = str_replace("./", "", $tpl);
+
+        if (!file_exists($tpl)) {
+            $this->display('Common/index');
+        }else{
+            $this->display();
+        }
     }
 
     public function delete($id ='')

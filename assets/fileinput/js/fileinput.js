@@ -2,14 +2,14 @@
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
  * @version 4.1.8
  *
- * File input styled for Bootstrap 3.0 that utilizes HTML5 File Input's advanced
- * features including the FileReader API.
- *
+ * File input styled for Bootstrap 3.0 that utilizes HTML5 File Input's advanced 
+ * features including the FileReader API. 
+ * 
  * The plugin drastically enhances the HTML file input to preview multiple files on the client before
- * upload. In addition it provides the ability to preview content of images, text, videos, audio, html,
- * flash and other objects. It also offers the ability to upload and delete files using AJAX, and add
+ * upload. In addition it provides the ability to preview content of images, text, videos, audio, html, 
+ * flash and other objects. It also offers the ability to upload and delete files using AJAX, and add 
  * files in batches (i.e. preview, append, or remove before upload).
- *
+ * 
  * Author: Kartik Visweswaran
  * Copyright: 2015, Kartik Visweswaran, Krajee.com
  * For more JQuery plugins visit http://plugins.krajee.com
@@ -910,7 +910,6 @@
                     type: 'DELETE',
                     dataType: 'json',
                     data: $.extend({key: vKey}, extraData),
-
                     beforeSend: function (jqXHR) {
                         addCss($frame, 'file-uploading');
                         addCss($el, 'disabled');
@@ -1146,7 +1145,6 @@
                 url: self.uploadUrl,
                 type: 'POST',
                 dataType: 'json',
-                
                 data: self.formdata,
                 cache: false,
                 processData: false,

@@ -29,7 +29,7 @@
     css = {
       "position": (options.ele === "body" ? "fixed" : "absolute"),
       "margin": 0,
-      "z-index": "9999",
+      "z-index": "999999999",
       "display": "none"
     };
     css[options.offset.from] = offsetAmount + "px";

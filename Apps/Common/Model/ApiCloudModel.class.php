@@ -20,18 +20,18 @@ Class ApiCloudModel {
 
     public function __construct($model =''){
         if($model) $this->model   =   $model;
-        $this->appKey = sha1(C('API_ID')."UZ".C('API_KEY')."UZ".getMillisecond()).".".getMillisecond();
+        $this->appKey = sha1(session('app_id')."UZ".session('app_key')."UZ".getMillisecond()).".".getMillisecond();
+        session('appKey',$this->appKey);
     }
 
-    public function getPage($map = '',$page =1, $limit = 16,$order =' createdAt DESC')
+    public function getPage($map = '',$page =1, $limit = 16,$order ='createdAt DESC')
     {
-        // $countList = $this->where($map)->select();
-
+        $count = $this->where($map)->count();
         $volist = $this->where($map)->page($page,$limit)->order($order)->select();
         $data['cpage'] = $page;
         $data['limit'] = $limit;
         // $data['count'] = count($countList);
-        $data['count'] = 10000;
+        $data['count'] = $count['count'];
         $pagecount = ceil($data['count'] / $data['limit']);
         if ($pagecount < 1) $pagecount =1;
         $data['pages'] = $pagecount;
@@ -150,9 +150,26 @@ Class ApiCloudModel {
             $filter['order'] = $this->order;
         }
         if ($this->limit) {
-            $filter['limit'] = $this->limit;
+            $filter['limit'] = (int)$this->limit;
+        }
+        if ($filter) {
+            $filter = json_encode($filter);
+            $url.='?filter='.urlencode($filter);
+        }
+        $data =  $this->baseHttp($url);
+        return $data;
+    }
+
+    public function count()
+    {
+        if ($this->class) {
+            $url = $this->url.'mcm/api/'.$this->class.'/count';
         }
 
+        $filter = array();
+        if ($this->where) {
+            $filter['where'] = $this->where;
+        }
         if ($filter) {
             $filter = json_encode($filter);
             $url.='?filter='.urlencode($filter);
@@ -177,6 +194,8 @@ Class ApiCloudModel {
         }else{
             return false;
         }
+        // $data['img']['url'] = 'fdsf';
+        // print_r(json_encode($data));exit();
         $ret = $this->baseHttp($url,'PUT',$data);
         return $ret ;
     }
@@ -213,12 +232,15 @@ Class ApiCloudModel {
     public function baseHttp($url = '',$method = 'GET',$data = '')
     {
         $header = array(
-            'X-APICloud-AppId: '.C('API_ID'),
+            'X-APICloud-AppId: '.session('app_id'),
             'X-APICloud-AppKey: '.$this->appKey,
             'Content-Type: application/json',
         );
-
-
+        // $header = array(
+        //     'X-APICloud-AppId: A6985645571286',
+        //     'X-APICloud-AppKey: 564E069D-1D7A-F6FE-30F3-68046819EF1D',
+        //     'Content-Type: application/json',
+        // );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);

@@ -1,39 +1,41 @@
-<extend name="Public:baseAjax" />
-<block name="content">
-<Widget:show col="12" bdcls="no-padding" title="新增数据">
-<form method="post" data-ajax action="{$updateUrl}">
+<div class="page animated bounceInDown">
+
+<Widget:show col="12" bdcls="no-padding" title="修改{$menu.title}">
+<form method="post" submit-ajax action="{$updateUrl}">
 <input type="hidden" name="id" value="{$vo.id}">
 <table class="table table-bordered">
-    <volist name="model[fields]" id="f">
+    <volist name="menu[field]" id="f">
     <tr >
+        <notin name="f[name]" value="id">
         <eq name="f[showAdd]" value="1">
-            <td width="180" style="text-align:right">{$f.label}</td>
+            <td width="180" style="text-align:right">{$f.title}</td>
             <td >
-            {:ipt($f,$vo[$f['name']])}
+            <if condition="$f[type] eq 'text' ">
+            <include file="Common/ipt_text"/>
+            <elseif condition="$f[type] eq 'date'"/>
+            <include file="Common/ipt_date"/>
+            <elseif condition="$f[type] eq 'file'"/>
+            <include file="Common/ipt_file"/>
+            <elseif condition="$f[type] eq 'ueditor'"/>
+            <include file="Common/ipt_ueditor"/>
+            <elseif condition="$f[type] eq 'pointer'"/>
+            <include file="Common/ipt_pointer"/>
+            <else/>
+            <include file="Common/ipt_text"/>
+            </if>
             </td>
         </eq>
+        </notin>
     </tr>
     </volist>
     <tr>
         <td colspan="2">
         <button class="btn btn-primary" type="submit">保存</button>
-    <a class="btn btn-default" href="#{$backUrl}">取消</a>
+    <a class="btn btn-default" href="{$backUrl}">取消</a>
         </td>
     </tr>
-</table> 
-    
+</table>
 </form>
 </Widget:show>
-<load href="assets/trumbowyg/trumbowyg.css"/>
-<load href="assets/trumbowyg/trumbowyg.js"/>
-<load href="assets/trumbowyg/zh_cn.js"/>
-<script type="text/javascript">
-$(function(){
-    $('[data-editor]').trumbowyg({
-        lang: 'zh_cn',
-        resetCss: true,
-        autogrow: true,
-    });
-})    
-</script>
-</block>
+
+</div>

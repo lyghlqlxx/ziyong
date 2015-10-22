@@ -1,46 +1,25 @@
-<extend name="Public:baseAjax" />
-<block name="content">
-<Widget:show bdcls="no-padding" title="{$model.title}" col="12">
-    <Widget:action id="modelObj-header" title="">
-        <a ajax-dialog grid-btn class="btn btn-primary" href="#{$addUrl}" >新增</a>
-        <a ajax-dialog grid-btn class="btn btn-info disabled" href="#{$editUrl}" >修改</a>
-        <a grid-delete data-ajax class="btn btn-danger disabled" href="{$delUrl}" >删除</a>
-    </Widget:action>
-    <div class="table-responsive">
-        <table id="modelObj" class="table table-bordered">
-            <thead>
-            <volist name="model[fields]" id="f">
-            <eq name="f[showList]" value="1">
-                <th w_index="{$f.name}">{$f.label}</th>
-            </eq>
-            </volist>
-            </thead>
-        </table>
-    </div>
-    <div id="modelObj-footer" class="widget-footer">
-          
-    </div>
+<div class="page animated bounceInDown">
+
+<Widget:show title="{$menu.title}" col="12">
+<Widget:action id="modelObj-action" title="">
+    <a class="btn btn-primary btn-sm" href="{$addUrl}">新增</a>
+    <a grid-btn class="btn btn-primary disabled btn-sm" href="{$editUrl}">修改</a>
+    <a grid-btn grid-delete class="btn disabled btn-danger btn-sm" href="{$delUrl}">删除</a>
+</Widget:action>
+<div class="table-responsive">
+    <table id="modelObj" class="table table-bordered table-striped table-hover">
+        <thead>
+        <volist name="menu[field]" id="f">
+        <eq name="f[showList]" value="1">
+            <th w_index="{$f.name}">{$f.title}</th>
+        </eq>
+        </volist>
+        </thead>
+    </table>
+</div>
+<div id="modelObj-pager" class="widget-footer"></div>
 </Widget:show>
 
+<include file="Common/table" url="0" table="modelObj" rows="10" />
+</div>
 
-<load href="assets/js/bsgrid/css/bsgrid.all.css" />
-<script type="text/javascript">
-pageSetUp();
-var modelObj;
-var pagefunction = function() {
-    loadScript("assets/js/bsgrid/bsgrid.all.js", run);
-    function run(){
-        modelObj = $.fn.bsgrid.init('modelObj', {
-            url: '{:U($con."/index")}',
-            pageSizeSelect: false,
-            // pageAll:true,
-            // displayBlankRows:false,
-            // pagingLittleToolbar: true,
-            pageSize: 10
-        });
-    }
-}
-pagefunction();
-
-</script>
-</block>

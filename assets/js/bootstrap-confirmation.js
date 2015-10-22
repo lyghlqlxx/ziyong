@@ -66,10 +66,10 @@
 	Confirmation.DEFAULTS = $.extend({}, $.fn.popover.Constructor.DEFAULTS, {
 		placement 		: 'top',
 		title 			: '操作确定?',
-		btnOkClass 		: 'btn btn-xs btn-danger',
+		btnOkClass 		: 'btn btn-sm btn-danger',
 		btnOkLabel 		: '确定',
 		btnOkIcon 		: 'glyphicon glyphicon-ok',
-		btnCancelClass 	: 'btn btn-xs btn-default',
+		btnCancelClass 	: 'btn btn-sm btn-default',
 		btnCancelLabel 	: '取消',
 		btnCancelIcon 	: 'glyphicon glyphicon-remove',
 		href 			: '#',
@@ -80,17 +80,13 @@
 		onHide 			: function(event, element){},
 		onConfirm 		: function(event, element){},
 		onCancel 		: function(event, element){},
-        template:
-          '<div class="popover confirmation">' +
-            '<div class="arrow"></div>' +
-            '<h3 class="popover-title"></h3>' +
-            '<div class="popover-content text-center">'+
-              '<div class="btn-group">'+
-                '<a class="btn" data-apply="confirmation"></a>'+
-                '<a class="btn" data-dismiss="confirmation"></a>'+
-              '</div>'+
-            '</div>'+
-          '</div>'
+		template 		:   '<div class="popover"><div class="arrow"></div>'
+							+ '<h3 class="popover-title"></h3>'
+							+ '<div class="popover-content">'
+							+ '<a data-apply="confirmation">Yes</a>'
+							+ ' <a data-dismiss="confirmation">No</a>'
+							+ '</div>'
+							+ '</div>'
 	});
 
 

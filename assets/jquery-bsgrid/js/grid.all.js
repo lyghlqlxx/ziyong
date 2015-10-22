@@ -900,7 +900,7 @@ StringBuilder.prototype = function () {
             var trObj = $.fn.bsgrid.getRow(row, options);
             trObj.addClass('selected');
             if (options.settings.rowSelectedColor) {
-                trObj.addClass('active');
+                trObj.addClass('success');
             }
             if (!!options.settings.event.selectRowEvent) {
                 options.settings.event.selectRowEvent($.fn.bsgrid.getRowRecord(trObj), row, trObj, options);
@@ -911,7 +911,7 @@ StringBuilder.prototype = function () {
             var row = $.fn.bsgrid.getSelectedRowIndex(options);
             if (row != -1) {
                 var trObj = $.fn.bsgrid.getRow(row, options);
-                trObj.removeClass('selected').removeClass('active');
+                trObj.removeClass('selected').removeClass('success');
                 if (!!options.settings.event.unselectRowEvent) {
                     options.settings.event.unselectRowEvent($.fn.bsgrid.getRowRecord(trObj), row, trObj, options);
                 }

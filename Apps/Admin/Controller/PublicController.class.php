@@ -2,43 +2,31 @@
 namespace Admin\Controller;
 use Think\Controller;
 class PublicController extends Controller {
-    public function ckLogin($account ='',$password=''){
-        if(!$account || !$password)
-        {
-            $this->error('请输入登陆账号和密码');
+    public function cklogin()
+    {
+        $account = I('account');
+        $pw = I('password');
+        if ($account =='' || $pw == '') {
+            $this->error('请输入用户名或密码');
+            return;
         }
-
-        if ($account == C('API_ID') && $password == C('API_KEY')) {
-            $ApiCloud = D('ApiCloud');
-            $map['class'] = 'role';
-            $vo = $ApiCloud->where($map)->find();
-            if ($vo !== FLASE) {
-                session('uid',1);
-                session('rid',1);
-                session('admin','yes');
-                $this->success('登陆成功','index.php');
-            }else{
-                $this->error('登陆失败，请检查配置文件或输入的参数');
-            }
+        if ($account != 'admin') {
+            $this->error('登陆账号错误');
         }
-
-        $ApiCloud = D('ApiCloud');
-        $map['class'] = 'ac_user';
-        $map['account'] = $account;
-        $map['password'] = md5($account);
-        $vo = $ApiCloud->where($map)->find();
-        if ($vo) {
-            session('uid',$vo['id']);
-            $this->success('登陆成功','index.php');
-        }else{
-            $this->error('登陆失败，登录名或者密码错误');
+        $password = C('ADMIN_PWD');
+        if ($pw != $password) {
+            $this->error('登陆密码错误');
         }
+        session('admin_id',1);
+        session('admin',true);
+        $this->success('登录成功，转到主页', U('Admin/Index/index'));
 
+        
     }
 
     public function logout()
     {
-        session(null);
-        redirect('index.php');
+        session(NULL);
+        $this->success('登出成功','index.php');
     }
 }
