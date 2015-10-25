@@ -90,6 +90,17 @@ $(function(){
         }
     });
 
+    $('[name=key]').on('keypress',function(event){
+        var v = $(this).val();
+        if(event.keyCode == "13"){
+            // if(!v) return false;
+            var url = [table].options.settings.url;
+            url = U('key',v,url);
+            [table].options.settings.url = url;
+            [table].page(1);
+        }
+    })
+
 
 
 })

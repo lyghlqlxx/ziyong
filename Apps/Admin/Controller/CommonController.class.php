@@ -91,10 +91,18 @@ class CommonController extends Controller {
         }
     }
 
-    public function index($curPage =1,$pageSize = 10){
+    public function index($key = '',$curPage =1,$pageSize = 10){
         if (IS_POST) {
             $m = D('ApiCloud');
             $map['class'] = parse_name($this->con);
+
+            if ($key) {
+                foreach ($this->menu['field'] as $k) {
+                    if($k['search'])
+                        $map[$k['name']]['like'] = $key;
+                }
+            }
+            // print_r($map);exit();
 
             $ret = $m->getPage($map,$curPage,$pageSize);
             if (!$ret){
